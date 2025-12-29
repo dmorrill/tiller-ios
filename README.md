@@ -135,20 +135,26 @@ To safely update rows even when sheets are sorted/filtered, the app adds a singl
 
 ## Contributing
 
-We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
+We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for detailed information on:
+- How to report bugs and suggest features
+- Development setup and workflow
+- Code style and safety guidelines
+- Testing requirements
+- Pull request process
+
+### Quick Start for Contributors
+1. Fork the repository
+2. Read [CONTRIBUTING.md](CONTRIBUTING.md)
+3. Check [open issues](https://github.com/dmorrill/tiller-ios/issues) for something to work on
+4. Comment on an issue before starting work
+5. Submit a PR with tests
 
 ### Priority Areas
-- Android companion app
+- Transaction categorization improvements
 - Additional Tiller template support
-- Accessibility improvements
-- Localization
+- Accessibility enhancements
 - Performance optimizations
-
-### Development Setup
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes with tests
-4. Submit a pull request
+- Test coverage
 
 ## Privacy & Security
 
