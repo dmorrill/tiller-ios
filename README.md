@@ -37,6 +37,18 @@ The app follows strict write-back rules:
 - Only writes to explicitly documented columns
 - Maintains immutable row IDs for safe updates
 
+## Repository Structure
+
+This is a monorepo containing both the iOS app and Laravel API backend:
+
+```
+tiller-ios/
+├── TillerCompanion/     # iOS app (Swift/SwiftUI)
+├── backend/             # Laravel API backend
+├── docs/                # Documentation
+└── scripts/             # Build and deployment scripts
+```
+
 ## Getting Started
 
 ### Prerequisites
@@ -53,17 +65,38 @@ The app follows strict write-back rules:
 4. Select your Tiller spreadsheet
 
 #### Building from Source
+
+**Backend Setup:**
 ```bash
 # Clone the repository
 git clone https://github.com/dmorrill/tiller-ios.git
-cd tiller-ios
+cd tiller-ios/backend
 
-# Install dependencies
+# Install Laravel dependencies
+composer install
+
+# Configure environment
+cp .env.example .env
+php artisan key:generate
+
+# Run migrations
+php artisan migrate
+
+# Start the development server
+php artisan serve
+```
+
+**iOS App Setup:**
+```bash
+cd ../TillerCompanion
+
+# Install CocoaPods dependencies (if needed)
 pod install
 
 # Open in Xcode
 open TillerCompanion.xcworkspace
 
+# Configure API endpoint in Config.plist
 # Build and run on your device
 ```
 
