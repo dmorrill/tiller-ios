@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TransactionListView: View {
     // MARK: - Properties
+    @EnvironmentObject var syncManager: SyncManager
     @StateObject private var viewModel = TransactionsViewModel()
     @State private var searchText = ""
     @State private var selectedFilter = TransactionFilter.uncategorized
@@ -137,7 +138,7 @@ struct TransactionRowView: View {
 
             Spacer()
 
-            Text(transaction.amount.formatted(.currency(code: "USD")))
+            Text(transaction.displayAmount)
                 .font(.system(.body, design: .rounded))
                 .fontWeight(.medium)
                 .foregroundColor(transaction.amount > 0 ? .green : .primary)
@@ -167,17 +168,29 @@ struct FilterChip: View {
 }
 
 // MARK: - View Model
+@MainActor
 class TransactionsViewModel: ObservableObject {
     @Published var transactions: [Transaction] = []
     @Published var filteredTransactions: [Transaction] = []
     @Published var isLoading = false
     @Published var error: Error?
 
+    private let syncManager: SyncManager
+
+    init(syncManager: SyncManager = SyncManager()) {
+        self.syncManager = syncManager
+        loadTransactions()
+    }
+
+    func loadTransactions() {
+        self.transactions = syncManager.transactions
+        applyFilter(.all)
+    }
+
     func refreshTransactions() async {
         isLoading = true
-        // TODO: Fetch from API
-        // Simulated delay
-        try? await Task.sleep(nanoseconds: 1_000_000_000)
+        await syncManager.performSync()
+        loadTransactions()
         isLoading = false
     }
 
@@ -194,21 +207,14 @@ class TransactionsViewModel: ObservableObject {
     }
 
     func categorizeTransaction(_ transaction: Transaction, category: String) async {
-        // TODO: Update via API
-        print("Categorizing transaction \(transaction.id) as \(category)")
+        do {
+            try await syncManager.updateTransaction(transaction, category: category)
+            loadTransactions()
+        } catch {
+            self.error = error
+            print("Error categorizing transaction: \(error)")
+        }
     }
-}
-
-// MARK: - Models
-struct Transaction: Identifiable {
-    let id: String
-    let date: Date
-    let description: String
-    let amount: Decimal
-    let account: String
-    var category: String?
-    var note: String?
-    var tags: [String] = []
 }
 
 enum TransactionFilter: CaseIterable {
