@@ -42,28 +42,7 @@ struct TillerCompanionApp: App {
     }
 }
 
-// MARK: - Placeholder Services (to be implemented)
-class AuthService: ObservableObject {
-    @Published var isAuthenticated = false
-    @Published var currentUser: User?
-
-    func checkAuthStatus() async {
-        // Check if user has valid auth token
-        // This will connect to Laravel backend
-    }
-}
-
-class SyncManager: ObservableObject {
-    @Published var isSyncing = false
-    @Published var lastSyncDate: Date?
-
-    func performSync() async {
-        // Sync with Google Sheets via Laravel API
-    }
-}
-
-struct User {
-    let id: String
-    let email: String
-    let googleId: String
-}
+// Services are now defined in separate files:
+// - Services/AuthService.swift
+// - Services/SyncManager.swift
+// - Models/Models.swift
