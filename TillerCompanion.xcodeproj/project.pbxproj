@@ -19,6 +19,7 @@
 		6F9390133E6F42A2A2F0E2B8 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A4AB137CA5BB391D4CD7F15 /* LoginView.swift */; };
 		88416D314FE68483353D94A5 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65726B997029F3643BFA001 /* APIClient.swift */; };
 		D41AEBF6334C2130726D9D6C /* ConnectSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC252FA8B61D0DBE0C2233A6 /* ConnectSheetView.swift */; };
+		EC4AA686474E669DB30C09A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D452ED06F88201FF71C088A1 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		C65726B997029F3643BFA001 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		CCD8B78A67E98BC17446E173 /* TillerCompanion.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = TillerCompanion.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEAE4A996956D2C046AF6389 /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
+		D452ED06F88201FF71C088A1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D526CB115677D434BB4E2E42 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		E651317A81ACC05143BF28D3 /* SyncManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncManager.swift; sourceTree = "<group>"; };
 		EC252FA8B61D0DBE0C2233A6 /* ConnectSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectSheetView.swift; sourceTree = "<group>"; };
@@ -42,6 +44,7 @@
 		0C37D95F0EFFF12C496E61FA /* TillerCompanion */ = {
 			isa = PBXGroup;
 			children = (
+				D452ED06F88201FF71C088A1 /* Assets.xcassets */,
 				95E65FEACFC2DFAAB21C087C /* ContentView.swift */,
 				D526CB115677D434BB4E2E42 /* Info.plist */,
 				396AFDD7C9FCC588F8548D35 /* App */,
@@ -139,18 +142,18 @@
 			);
 			sourceTree = "<group>";
 		};
-		"TEMP_130CB2B4-4B83-4059-A729-DDACC8910AF5" /* Core */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Core;
-			sourceTree = "<group>";
-		};
-		"TEMP_FF0ACAFB-0312-4CCD-9ED7-710724CE0FB9" /* Shared */ = {
+		"TEMP_B60AFACC-F21D-45B6-ABB0-23C8C33F194C" /* Shared */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			path = Shared;
+			sourceTree = "<group>";
+		};
+		"TEMP_C3B337DC-4634-4AFF-8A67-4C20667E8A11" /* Core */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Core;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -161,6 +164,7 @@
 			buildConfigurationList = AD7D8A36E3757E1E3C6D91A8 /* Build configuration list for PBXNativeTarget "TillerCompanion" */;
 			buildPhases = (
 				0165CBE1E88941E96EBF8650 /* Sources */,
+				180517313071E02298458DA2 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -205,6 +209,17 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		180517313071E02298458DA2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC4AA686474E669DB30C09A7 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0165CBE1E88941E96EBF8650 /* Sources */ = {
