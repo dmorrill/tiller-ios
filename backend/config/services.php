@@ -39,6 +39,8 @@ return [
         'client_id' => env('GOOGLE_CLIENT_ID'),
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),
         'redirect' => env('GOOGLE_REDIRECT_URI'),
+        'service_account_email' => env('GOOGLE_SERVICE_ACCOUNT_EMAIL'),
+        'service_account_key_path' => env('GOOGLE_SERVICE_ACCOUNT_KEY_PATH'),
     ],
 
 ];

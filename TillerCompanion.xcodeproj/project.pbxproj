@@ -12,14 +12,19 @@
 		0E9E6B26B31FD7540EEC2ACA /* TillerCompanionApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE2A657FEC555E3FFEBE348 /* TillerCompanionApp.swift */; };
 		22CD5EFD75E661CCC439D70D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E65FEACFC2DFAAB21C087C /* ContentView.swift */; };
 		29581F8EC01BF461EF967CE9 /* SyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E651317A81ACC05143BF28D3 /* SyncManager.swift */; };
+		2FEBC909B61BDB085B656C17 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAE4A996956D2C046AF6389 /* KeychainService.swift */; };
+		31E73E69008A09F9D039AD03 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6688E23765CD89A2384B30F /* RegisterView.swift */; };
 		540B8E470A1F6914AFD38B20 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB78D1C2D128F3FD8BF8C2E0 /* Models.swift */; };
 		5EFAFF0484C193566FD50E0C /* TransactionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474798DA0DE3D4A530656EDC /* TransactionListView.swift */; };
+		6F9390133E6F42A2A2F0E2B8 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A4AB137CA5BB391D4CD7F15 /* LoginView.swift */; };
 		88416D314FE68483353D94A5 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65726B997029F3643BFA001 /* APIClient.swift */; };
+		D41AEBF6334C2130726D9D6C /* ConnectSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC252FA8B61D0DBE0C2233A6 /* ConnectSheetView.swift */; };
 		EC4AA686474E669DB30C09A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D452ED06F88201FF71C088A1 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2A3CC3BD4839B99E1D28AFB0 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		2A4AB137CA5BB391D4CD7F15 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		474798DA0DE3D4A530656EDC /* TransactionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionListView.swift; sourceTree = "<group>"; };
 		895A7994D1002A1C2EC7DD5E /* CategoryPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPickerView.swift; sourceTree = "<group>"; };
 		95E65FEACFC2DFAAB21C087C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -27,9 +32,12 @@
 		AB78D1C2D128F3FD8BF8C2E0 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		C65726B997029F3643BFA001 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		CCD8B78A67E98BC17446E173 /* TillerCompanion.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = TillerCompanion.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CEAE4A996956D2C046AF6389 /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 		D452ED06F88201FF71C088A1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D526CB115677D434BB4E2E42 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		E651317A81ACC05143BF28D3 /* SyncManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncManager.swift; sourceTree = "<group>"; };
+		EC252FA8B61D0DBE0C2233A6 /* ConnectSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectSheetView.swift; sourceTree = "<group>"; };
+		F6688E23765CD89A2384B30F /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -60,6 +68,7 @@
 			children = (
 				C65726B997029F3643BFA001 /* APIClient.swift */,
 				2A3CC3BD4839B99E1D28AFB0 /* AuthService.swift */,
+				CEAE4A996956D2C046AF6389 /* KeychainService.swift */,
 				E651317A81ACC05143BF28D3 /* SyncManager.swift */,
 			);
 			path = Services;
@@ -68,7 +77,9 @@
 		619E759D2FD7809A7A03EE08 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				82C2D8600C2DB67515329A7C /* Auth */,
 				B707A5A0BEB443D272887254 /* Categories */,
+				9489368D104FC0DA31DC0439 /* Sheets */,
 				740380D32CFA9FED20001833 /* Transactions */,
 			);
 			path = Features;
@@ -80,6 +91,23 @@
 				474798DA0DE3D4A530656EDC /* TransactionListView.swift */,
 			);
 			path = Transactions;
+			sourceTree = "<group>";
+		};
+		82C2D8600C2DB67515329A7C /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				2A4AB137CA5BB391D4CD7F15 /* LoginView.swift */,
+				F6688E23765CD89A2384B30F /* RegisterView.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		9489368D104FC0DA31DC0439 /* Sheets */ = {
+			isa = PBXGroup;
+			children = (
+				EC252FA8B61D0DBE0C2233A6 /* ConnectSheetView.swift */,
+			);
+			path = Sheets;
 			sourceTree = "<group>";
 		};
 		B707A5A0BEB443D272887254 /* Categories */ = {
@@ -114,14 +142,14 @@
 			);
 			sourceTree = "<group>";
 		};
-		"TEMP_8F00203B-8D7A-4C67-9C10-92FC7EDBE205" /* Shared */ = {
+		"TEMP_B60AFACC-F21D-45B6-ABB0-23C8C33F194C" /* Shared */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			path = Shared;
 			sourceTree = "<group>";
 		};
-		"TEMP_B6F9C9B0-F245-4496-8380-4BB6B30F432B" /* Core */ = {
+		"TEMP_C3B337DC-4634-4AFF-8A67-4C20667E8A11" /* Core */ = {
 			isa = PBXGroup;
 			children = (
 			);
@@ -201,8 +229,12 @@
 				88416D314FE68483353D94A5 /* APIClient.swift in Sources */,
 				0CDCB43731CB3F12B9F885D7 /* AuthService.swift in Sources */,
 				02B056481215F72D8FFF8E3E /* CategoryPickerView.swift in Sources */,
+				D41AEBF6334C2130726D9D6C /* ConnectSheetView.swift in Sources */,
 				22CD5EFD75E661CCC439D70D /* ContentView.swift in Sources */,
+				2FEBC909B61BDB085B656C17 /* KeychainService.swift in Sources */,
+				6F9390133E6F42A2A2F0E2B8 /* LoginView.swift in Sources */,
 				540B8E470A1F6914AFD38B20 /* Models.swift in Sources */,
+				31E73E69008A09F9D039AD03 /* RegisterView.swift in Sources */,
 				29581F8EC01BF461EF967CE9 /* SyncManager.swift in Sources */,
 				0E9E6B26B31FD7540EEC2ACA /* TillerCompanionApp.swift in Sources */,
 				5EFAFF0484C193566FD50E0C /* TransactionListView.swift in Sources */,
