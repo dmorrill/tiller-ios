@@ -3,134 +3,285 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 77;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1A1234561234567890ABCDEF /* TillerCompanionApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1234551234567890ABCDEF /* TillerCompanionApp.swift */; };
-		1A1234581234567890ABCDEF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1234571234567890ABCDEF /* ContentView.swift */; };
-		1A12345A1234567890ABCDEF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A1234591234567890ABCDEF /* Assets.xcassets */; };
+		02B056481215F72D8FFF8E3E /* CategoryPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895A7994D1002A1C2EC7DD5E /* CategoryPickerView.swift */; };
+		0CDCB43731CB3F12B9F885D7 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3CC3BD4839B99E1D28AFB0 /* AuthService.swift */; };
+		0E9E6B26B31FD7540EEC2ACA /* TillerCompanionApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE2A657FEC555E3FFEBE348 /* TillerCompanionApp.swift */; };
+		22CD5EFD75E661CCC439D70D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E65FEACFC2DFAAB21C087C /* ContentView.swift */; };
+		29581F8EC01BF461EF967CE9 /* SyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E651317A81ACC05143BF28D3 /* SyncManager.swift */; };
+		2FEBC909B61BDB085B656C17 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAE4A996956D2C046AF6389 /* KeychainService.swift */; };
+		31E73E69008A09F9D039AD03 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6688E23765CD89A2384B30F /* RegisterView.swift */; };
+		540B8E470A1F6914AFD38B20 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB78D1C2D128F3FD8BF8C2E0 /* Models.swift */; };
+		5EFAFF0484C193566FD50E0C /* TransactionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474798DA0DE3D4A530656EDC /* TransactionListView.swift */; };
+		6F9390133E6F42A2A2F0E2B8 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A4AB137CA5BB391D4CD7F15 /* LoginView.swift */; };
+		88416D314FE68483353D94A5 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65726B997029F3643BFA001 /* APIClient.swift */; };
+		D41AEBF6334C2130726D9D6C /* ConnectSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC252FA8B61D0DBE0C2233A6 /* ConnectSheetView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1A1234521234567890ABCDEF /* TillerCompanion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TillerCompanion.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		1A1234551234567890ABCDEF /* TillerCompanionApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TillerCompanionApp.swift; sourceTree = "<group>"; };
-		1A1234571234567890ABCDEF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		1A1234591234567890ABCDEF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2A3CC3BD4839B99E1D28AFB0 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		2A4AB137CA5BB391D4CD7F15 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		474798DA0DE3D4A530656EDC /* TransactionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionListView.swift; sourceTree = "<group>"; };
+		895A7994D1002A1C2EC7DD5E /* CategoryPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPickerView.swift; sourceTree = "<group>"; };
+		95E65FEACFC2DFAAB21C087C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		AAE2A657FEC555E3FFEBE348 /* TillerCompanionApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TillerCompanionApp.swift; sourceTree = "<group>"; };
+		AB78D1C2D128F3FD8BF8C2E0 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		C65726B997029F3643BFA001 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		CCD8B78A67E98BC17446E173 /* TillerCompanion.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = TillerCompanion.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CEAE4A996956D2C046AF6389 /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
+		D526CB115677D434BB4E2E42 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		E651317A81ACC05143BF28D3 /* SyncManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncManager.swift; sourceTree = "<group>"; };
+		EC252FA8B61D0DBE0C2233A6 /* ConnectSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectSheetView.swift; sourceTree = "<group>"; };
+		F6688E23765CD89A2384B30F /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
-		1A1234491234567890ABCDEF = {
+		0C37D95F0EFFF12C496E61FA /* TillerCompanion */ = {
 			isa = PBXGroup;
 			children = (
-				1A1234541234567890ABCDEF /* TillerCompanion */,
-				1A1234531234567890ABCDEF /* Products */,
+				95E65FEACFC2DFAAB21C087C /* ContentView.swift */,
+				D526CB115677D434BB4E2E42 /* Info.plist */,
+				396AFDD7C9FCC588F8548D35 /* App */,
+				619E759D2FD7809A7A03EE08 /* Features */,
+				BBF6FCD473873B6A5AC41FFD /* Models */,
+				3F52860446B99B1AEF5F6BF3 /* Services */,
 			);
+			path = TillerCompanion;
 			sourceTree = "<group>";
 		};
-		1A1234531234567890ABCDEF /* Products */ = {
+		396AFDD7C9FCC588F8548D35 /* App */ = {
 			isa = PBXGroup;
 			children = (
-				1A1234521234567890ABCDEF /* TillerCompanion.app */,
+				AAE2A657FEC555E3FFEBE348 /* TillerCompanionApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		3F52860446B99B1AEF5F6BF3 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				C65726B997029F3643BFA001 /* APIClient.swift */,
+				2A3CC3BD4839B99E1D28AFB0 /* AuthService.swift */,
+				CEAE4A996956D2C046AF6389 /* KeychainService.swift */,
+				E651317A81ACC05143BF28D3 /* SyncManager.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		619E759D2FD7809A7A03EE08 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				82C2D8600C2DB67515329A7C /* Auth */,
+				B707A5A0BEB443D272887254 /* Categories */,
+				9489368D104FC0DA31DC0439 /* Sheets */,
+				740380D32CFA9FED20001833 /* Transactions */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		740380D32CFA9FED20001833 /* Transactions */ = {
+			isa = PBXGroup;
+			children = (
+				474798DA0DE3D4A530656EDC /* TransactionListView.swift */,
+			);
+			path = Transactions;
+			sourceTree = "<group>";
+		};
+		82C2D8600C2DB67515329A7C /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				2A4AB137CA5BB391D4CD7F15 /* LoginView.swift */,
+				F6688E23765CD89A2384B30F /* RegisterView.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		9489368D104FC0DA31DC0439 /* Sheets */ = {
+			isa = PBXGroup;
+			children = (
+				EC252FA8B61D0DBE0C2233A6 /* ConnectSheetView.swift */,
+			);
+			path = Sheets;
+			sourceTree = "<group>";
+		};
+		B707A5A0BEB443D272887254 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				895A7994D1002A1C2EC7DD5E /* CategoryPickerView.swift */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		BBF6FCD473873B6A5AC41FFD /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				AB78D1C2D128F3FD8BF8C2E0 /* Models.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		DB00F2D5F3BE966437B95764 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CCD8B78A67E98BC17446E173 /* TillerCompanion.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		1A1234541234567890ABCDEF /* TillerCompanion */ = {
+		EE10F756BC03B0CACB81A211 = {
 			isa = PBXGroup;
 			children = (
-				1A1234551234567890ABCDEF /* TillerCompanionApp.swift */,
-				1A1234571234567890ABCDEF /* ContentView.swift */,
-				1A1234591234567890ABCDEF /* Assets.xcassets */,
+				0C37D95F0EFFF12C496E61FA /* TillerCompanion */,
+				DB00F2D5F3BE966437B95764 /* Products */,
 			);
-			path = TillerCompanion;
+			sourceTree = "<group>";
+		};
+		"TEMP_130CB2B4-4B83-4059-A729-DDACC8910AF5" /* Core */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		"TEMP_FF0ACAFB-0312-4CCD-9ED7-710724CE0FB9" /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Shared;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1A1234511234567890ABCDEF /* TillerCompanion */ = {
+		A332769AA28F0C92B41CF426 /* TillerCompanion */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1A1234601234567890ABCDEF /* Build configuration list for PBXNativeTarget "TillerCompanion" */;
+			buildConfigurationList = AD7D8A36E3757E1E3C6D91A8 /* Build configuration list for PBXNativeTarget "TillerCompanion" */;
 			buildPhases = (
-				1A12344E1234567890ABCDEF /* Sources */,
-				1A12344F1234567890ABCDEF /* Frameworks */,
-				1A1234501234567890ABCDEF /* Resources */,
+				0165CBE1E88941E96EBF8650 /* Sources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = TillerCompanion;
+			packageProductDependencies = (
+			);
 			productName = TillerCompanion;
-			productReference = 1A1234521234567890ABCDEF /* TillerCompanion.app */;
+			productReference = CCD8B78A67E98BC17446E173 /* TillerCompanion.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		1A12344A1234567890ABCDEF /* Project object */ = {
+		2600E65F397194388BEEB035 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1500;
-				LastUpgradeCheck = 1500;
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1600;
 				TargetAttributes = {
-					1A1234511234567890ABCDEF = {
-						CreatedOnToolsVersion = 15.0;
+					A332769AA28F0C92B41CF426 = {
+						DevelopmentTeam = "";
 					};
 				};
 			};
-			buildConfigurationList = 1A12344D1234567890ABCDEF /* Build configuration list for PBXProject "TillerCompanion" */;
+			buildConfigurationList = 2A1677BF8875BAB630E2956D /* Build configuration list for PBXProject "TillerCompanion" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
+				en,
 			);
-			mainGroup = 1A1234491234567890ABCDEF;
-			productRefGroup = 1A1234531234567890ABCDEF /* Products */;
+			mainGroup = EE10F756BC03B0CACB81A211;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1A1234511234567890ABCDEF /* TillerCompanion */,
+				A332769AA28F0C92B41CF426 /* TillerCompanion */,
 			);
 		};
 /* End PBXProject section */
 
-/* Begin PBXResourcesBuildPhase section */
-		1A1234501234567890ABCDEF /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1A12345A1234567890ABCDEF /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
-		1A12344E1234567890ABCDEF /* Sources */ = {
+		0165CBE1E88941E96EBF8650 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A1234581234567890ABCDEF /* ContentView.swift in Sources */,
-				1A1234561234567890ABCDEF /* TillerCompanionApp.swift in Sources */,
+				88416D314FE68483353D94A5 /* APIClient.swift in Sources */,
+				0CDCB43731CB3F12B9F885D7 /* AuthService.swift in Sources */,
+				02B056481215F72D8FFF8E3E /* CategoryPickerView.swift in Sources */,
+				D41AEBF6334C2130726D9D6C /* ConnectSheetView.swift in Sources */,
+				22CD5EFD75E661CCC439D70D /* ContentView.swift in Sources */,
+				2FEBC909B61BDB085B656C17 /* KeychainService.swift in Sources */,
+				6F9390133E6F42A2A2F0E2B8 /* LoginView.swift in Sources */,
+				540B8E470A1F6914AFD38B20 /* Models.swift in Sources */,
+				31E73E69008A09F9D039AD03 /* RegisterView.swift in Sources */,
+				29581F8EC01BF461EF967CE9 /* SyncManager.swift in Sources */,
+				0E9E6B26B31FD7540EEC2ACA /* TillerCompanionApp.swift in Sources */,
+				5EFAFF0484C193566FD50E0C /* TransactionListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		1A12345E1234567890ABCDEF /* Debug */ = {
+		0F6416DC2F94F5B32E625DA1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"TillerCompanion/Preview Content\"";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TillerCompanion/Info.plist;
+				INFOPLIST_GENERATION_MODE = GeneratedFile;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tillercompanion.app;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		1FD9B7367F26D1A104B1986A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"TillerCompanion/Preview Content\"";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TillerCompanion/Info.plist;
+				INFOPLIST_GENERATION_MODE = GeneratedFile;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tillercompanion.app;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		7C2F0E5252AC48778919AA6A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
@@ -155,6 +306,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -162,8 +314,8 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
 					"$(inherited)",
+					"DEBUG=1",
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -175,20 +327,25 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.9;
 			};
 			name = Debug;
 		};
-		1A12345F1234567890ABCDEF /* Release */ = {
+		B03C79EA2C48C66C35F9F8CF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
@@ -213,6 +370,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -226,93 +384,36 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		1A1234611234567890ABCDEF /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"TillerCompanion/Preview Content\"";
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.tiller.companion;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		1A1234621234567890ABCDEF /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"TillerCompanion/Preview Content\"";
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.tiller.companion;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				SWIFT_VERSION = 5.9;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1A12344D1234567890ABCDEF /* Build configuration list for PBXProject "TillerCompanion" */ = {
+		2A1677BF8875BAB630E2956D /* Build configuration list for PBXProject "TillerCompanion" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1A12345E1234567890ABCDEF /* Debug */,
-				1A12345F1234567890ABCDEF /* Release */,
+				7C2F0E5252AC48778919AA6A /* Debug */,
+				B03C79EA2C48C66C35F9F8CF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
-		1A1234601234567890ABCDEF /* Build configuration list for PBXNativeTarget "TillerCompanion" */ = {
+		AD7D8A36E3757E1E3C6D91A8 /* Build configuration list for PBXNativeTarget "TillerCompanion" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1A1234611234567890ABCDEF /* Debug */,
-				1A1234621234567890ABCDEF /* Release */,
+				0F6416DC2F94F5B32E625DA1 /* Debug */,
+				1FD9B7367F26D1A104B1986A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 1A12344A1234567890ABCDEF /* Project object */;
+	rootObject = 2600E65F397194388BEEB035 /* Project object */;
 }
