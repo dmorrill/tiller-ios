@@ -1,0 +1,27 @@
+name: TillerCompanion
+options:
+  bundleIdPrefix: com.tillercompanion
+  deploymentTarget:
+    iOS: "16.0"
+  xcodeVersion: "16.0"
+settings:
+  DEVELOPMENT_TEAM: ""
+  SWIFT_VERSION: "5.9"
+targets:
+  TillerCompanion:
+    type: application
+    platform: iOS
+    sources:
+      - TillerCompanion
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.tillercompanion.app
+        INFOPLIST_GENERATION_MODE: GeneratedFile
+        MARKETING_VERSION: "1.0.0"
+        CURRENT_PROJECT_VERSION: "1"
+        GENERATE_INFOPLIST_FILE: "YES"
+        DEVELOPMENT_ASSET_PATHS: "\"TillerCompanion/Preview Content\""
+    info:
+      path: TillerCompanion/Info.plist
+      properties:
+        UILaunchScreen: {}

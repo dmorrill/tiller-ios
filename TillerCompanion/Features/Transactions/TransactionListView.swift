@@ -177,8 +177,8 @@ class TransactionsViewModel: ObservableObject {
 
     private let syncManager: SyncManager
 
-    init(syncManager: SyncManager = SyncManager()) {
-        self.syncManager = syncManager
+    init(syncManager: SyncManager? = nil) {
+        self.syncManager = syncManager ?? SyncManager()
         loadTransactions()
     }
 
