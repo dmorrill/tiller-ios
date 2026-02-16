@@ -11,6 +11,9 @@ use App\Http\Controllers\Api\TransactionController;
 |--------------------------------------------------------------------------
 */
 
+// Health check
+Route::get('health', fn () => response()->json(['status' => 'ok', 'timestamp' => now()->toIso8601String()]));
+
 // Public auth routes
 Route::prefix('auth')->group(function () {
     Route::post('register', [AuthController::class, 'register']);
