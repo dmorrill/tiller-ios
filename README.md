@@ -88,16 +88,12 @@ php artisan serve
 
 **iOS App Setup:**
 ```bash
-cd ../TillerCompanion
+cd tiller-ios
 
-# Install CocoaPods dependencies (if needed)
-pod install
+# Open the Xcode project
+open TillerCompanion.xcodeproj
 
-# Open in Xcode
-open TillerCompanion.xcworkspace
-
-# Configure API endpoint in Config.plist
-# Build and run on your device
+# Build and run on your device or simulator (requires Xcode 15+)
 ```
 
 ## Architecture Overview
