@@ -30,18 +30,21 @@ struct ContentView: View {
                     Label("Transactions", systemImage: "list.bullet.rectangle")
                 }
                 .tag(0)
+                .accessibilityLabel(A11yLabels.transactions)
 
             BudgetSnapshotView()
                 .tabItem {
                     Label("Budget", systemImage: "chart.pie")
                 }
                 .tag(1)
+                .accessibilityLabel(A11yLabels.budget)
 
             SettingsView()
                 .tabItem {
                     Label("Settings", systemImage: "gear")
                 }
                 .tag(2)
+                .accessibilityLabel(A11yLabels.settings)
         }
     }
 }
@@ -104,6 +107,7 @@ struct AccountBalanceRow: View {
         .padding()
         .background(Color(UIColor.systemGray6))
         .cornerRadius(8)
+        .accessibilityLabel(A11yLabels.balance(balance.formatted(.currency(code: "USD")), account: name))
     }
 }
 
@@ -139,6 +143,7 @@ struct BudgetCategoryRow: View {
         .padding()
         .background(Color(UIColor.systemGray6))
         .cornerRadius(8)
+        .accessibilityLabel(A11yLabels.budgetProgress(name, spent: spent.formatted(.currency(code: "USD")), budget: budget.formatted(.currency(code: "USD"))))
     }
 }
 
