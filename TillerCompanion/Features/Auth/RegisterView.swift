@@ -79,6 +79,7 @@ struct RegisterView: View {
             Spacer()
         }
         .padding(.top, 40)
+        .dismissKeyboardOnTap()
         .navigationBarTitleDisplayMode(.inline)
     }
 }

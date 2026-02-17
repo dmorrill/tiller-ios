@@ -83,6 +83,7 @@ struct TransactionListView: View {
             }
         }
         .listStyle(PlainListStyle())
+            .dismissKeyboardOnScroll()
     }
 
     private var loadingView: some View {
