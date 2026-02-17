@@ -80,6 +80,10 @@ struct BudgetSnapshotView: View {
                 }
             }
             .navigationTitle("Budget Snapshot")
+            .refreshable {
+                // TODO: Refresh budget data from sync manager
+                try? await Task.sleep(nanoseconds: 500_000_000)
+            }
         }
     }
 }
