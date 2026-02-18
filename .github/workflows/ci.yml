@@ -1,0 +1,22 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+jobs:
+  backend-tests:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mbstring, xml, sqlite3
+      - run: composer install --no-progress --prefer-dist
+      - run: cp .env.example .env && php artisan key:generate
+      - run: touch database/database.sqlite && php artisan migrate --force
+      - run: php artisan test
