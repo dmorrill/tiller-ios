@@ -10,6 +10,6 @@ test('sheet belongs to a user', function () {
 });
 
 test('sheet has a name', function () {
-    $sheet = Sheet::factory()->create(['name' => 'Morning Routine']);
-    expect($sheet->name)->toBe('Morning Routine');
+    $sheet = Sheet::factory()->create(['name' => 'Budget']);
+    expect($sheet->name)->toBe('Budget');
 });
