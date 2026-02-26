@@ -2,6 +2,14 @@
 
 An open-source iOS app that lets you manage your Tiller spreadsheet on the go — without ever taking ownership of your data.
 
+## Screenshots
+
+| Transactions | Budget | Settings | Onboarding |
+|:---:|:---:|:---:|:---:|
+| ![Transactions](docs/screenshots/transactions.png) | ![Budget](docs/screenshots/budget.png) | ![Settings](docs/screenshots/settings.png) | ![Onboarding](docs/screenshots/onboarding.png) |
+
+> **Note**: Replace placeholder screenshots with actual app screenshots before release.
+
 ## Overview
 
 Tiller iOS is a **sheet-first** mobile companion app for [Tiller](https://www.tillerhq.com) users. It provides a fast, native iOS interface for the most common on-the-go financial tasks while keeping your Google Sheets spreadsheet as the single source of truth.
@@ -66,6 +74,11 @@ tiller-ios/
 
 #### Building from Source
 
+**Prerequisites:**
+- Xcode 15.0 or later
+- PHP 8.2+ and Composer (for backend)
+- Git
+
 **Backend Setup:**
 ```bash
 # Clone the repository
@@ -78,6 +91,8 @@ composer install
 # Configure environment
 cp .env.example .env
 php artisan key:generate
+
+# Set up Google Cloud credentials (see docs/GOOGLE_CLOUD_SETUP.md)
 
 # Run migrations
 php artisan migrate
@@ -93,7 +108,19 @@ cd tiller-ios
 # Open the Xcode project
 open TillerCompanion.xcodeproj
 
-# Build and run on your device or simulator (requires Xcode 15+)
+# Select your target device or simulator
+# Build and run (⌘R) — requires Xcode 15+
+```
+
+> **Tip**: The iOS app connects to `localhost:8000` in debug mode. Make sure the backend is running before launching the app in the simulator.
+
+**Running Tests:**
+```bash
+# Backend tests
+cd backend && php artisan test
+
+# iOS tests (from Xcode)
+# Product → Test (⌘U)
 ```
 
 ## Architecture Overview

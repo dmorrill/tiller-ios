@@ -78,6 +78,7 @@ struct LoginView: View {
 
                 Spacer()
             }
+            .dismissKeyboardOnTap()
             .navigationDestination(isPresented: $showRegister) {
                 RegisterView()
             }
