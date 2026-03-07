@@ -9,14 +9,14 @@ class SheetSchema extends Model
 {
     protected $fillable = [
         'sheet_id',
-        'columns',
-        'detected_template',
-        'has_mobile_id_column',
+        'schema_type',
+        'column_mappings',
+        'detected_at',
     ];
 
     protected $casts = [
-        'columns' => 'array',
-        'has_mobile_id_column' => 'boolean',
+        'column_mappings' => 'array',
+        'detected_at' => 'datetime',
     ];
 
     /**
