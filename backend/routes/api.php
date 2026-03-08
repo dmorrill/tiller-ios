@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\SheetController;
 use App\Http\Controllers\Api\TransactionController;
+use App\Http\Controllers\Api\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,16 +45,8 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::patch('{id}', [TransactionController::class, 'update']);
     });
 
-    // Categories
-    Route::get('categories', function () {
-        return response()->json(['categories' => [
-            'Auto & Transport', 'Bills & Utilities', 'Business Services',
-            'Education', 'Entertainment', 'Fees & Charges', 'Food & Dining',
-            'Gifts & Donations', 'Health & Fitness', 'Home', 'Income',
-            'Investments', 'Kids', 'Personal Care', 'Pets', 'Shopping',
-            'Taxes', 'Transfer', 'Travel', 'Uncategorized',
-        ]]);
-    });
+    // Categories (from connected sheet, with fallback)
+    Route::get('categories', [CategoryController::class, 'index']);
 });
 
 // Health check

@@ -66,18 +66,36 @@ tiller-ios/
 
 #### Building from Source
 
-**Backend Setup:**
+**1. Google Cloud Service Account (required):**
+
+The backend uses a Google service account to read/write your Tiller spreadsheet on your behalf.
+
+1. Go to [Google Cloud Console](https://console.cloud.google.com)
+2. Create a new project (e.g., "Tiller iOS")
+3. Enable the **Google Sheets API**: APIs & Services → Library → search "Google Sheets API" → Enable
+4. Create a service account: APIs & Services → Credentials → Create Credentials → Service Account
+   - Name: `tiller-ios-backend`
+   - Skip the optional permissions steps
+5. Create a key: Click on the service account → Keys tab → Add Key → Create new key → JSON
+6. Save the downloaded JSON file — you'll need the path for your `.env`
+7. **Share your Tiller spreadsheet** with the service account email (e.g., `tiller-ios-backend@your-project.iam.gserviceaccount.com`) and give it **Editor** access
+
+**2. Backend Setup:**
 ```bash
 # Clone the repository
 git clone https://github.com/dmorrill/tiller-ios.git
 cd tiller-ios/backend
 
-# Install Laravel dependencies
+# Install dependencies (requires PHP 8.4+ and Composer)
 composer install
 
 # Configure environment
 cp .env.example .env
 php artisan key:generate
+
+# Add your service account config to .env:
+# GOOGLE_SERVICE_ACCOUNT_KEY_PATH=/path/to/your-service-account-key.json
+# GOOGLE_SERVICE_ACCOUNT_EMAIL=tiller-ios-backend@your-project.iam.gserviceaccount.com
 
 # Run migrations
 php artisan migrate
@@ -86,14 +104,20 @@ php artisan migrate
 php artisan serve
 ```
 
-**iOS App Setup:**
+> **Template requirement:** Your Tiller spreadsheet must use the **Foundation Template** (the default). The app detects and validates the expected column structure on first connection. Custom templates are not yet supported.
+
+**3. iOS App Setup:**
 ```bash
 cd tiller-ios
 
-# Open the Xcode project
+# Open the Xcode project (requires Xcode 15+, iOS 16+ target)
 open TillerCompanion.xcodeproj
 
-# Build and run on your device or simulator (requires Xcode 15+)
+# Configure the API URL in the app:
+# - For local development: http://localhost:8000/api
+# - For production: your deployed backend URL
+
+# Build and run on your device or simulator
 ```
 
 ## Architecture Overview

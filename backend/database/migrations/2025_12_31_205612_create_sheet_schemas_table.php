@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('sheet_schemas', function (Blueprint $table) {
             $table->id();
             $table->foreignId('sheet_id')->constrained()->onDelete('cascade');
-            $table->json('columns'); // Column mappings
-            $table->string('detected_template')->nullable();
-            $table->boolean('has_mobile_id_column')->default(false);
+            $table->string('schema_type')->default('foundation');
+            $table->json('column_mappings');
+            $table->timestamp('detected_at')->nullable();
             $table->timestamps();
 
             $table->unique('sheet_id');

@@ -4,212 +4,196 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Services\GoogleSheetsService;
-use App\Services\SheetAdapterService;
 use App\Models\Sheet;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 
 class TransactionController extends Controller
 {
-    protected GoogleSheetsService $sheetsService;
-    protected SheetAdapterService $adapterService;
+    /**
+     * Safe-to-write columns. Never write to formula or system columns.
+     */
+    protected const WRITABLE_COLUMNS = ['Category', 'Note'];
 
     public function __construct(
-        GoogleSheetsService $sheetsService,
-        SheetAdapterService $adapterService
-    ) {
-        $this->sheetsService = $sheetsService;
-        $this->adapterService = $adapterService;
-    }
+        protected GoogleSheetsService $sheetsService,
+    ) {}
 
     /**
-     * Get all transactions with optional filters
+     * Get all transactions with optional filters.
      */
     public function index(Request $request): JsonResponse
     {
         try {
-            $user = $request->user();
-            $sheet = $user->sheets()->where('sheet_type', 'transactions')->first();
+            $sheet = $request->user()->sheets()->first();
 
-            if (!$sheet) {
-                return response()->json(['error' => 'No transaction sheet configured'], 404);
+            if (!$sheet || !$sheet->schema) {
+                return response()->json(['error' => 'No sheet connected. Connect a Tiller sheet first.'], 404);
             }
 
-            // Set up Google Sheets service with user's token
-            $this->sheetsService->setAccessToken([
-                'access_token' => $user->google_token,
-                'refresh_token' => $user->google_refresh_token,
-            ]);
-
-            // Get transactions from sheet
-            $range = "{$sheet->sheet_name}!A:Z"; // Get all columns
-            $values = $this->sheetsService->getValues($sheet->spreadsheet_id, $range);
-
-            if (empty($values)) {
-                return response()->json(['transactions' => []]);
+            $mappings = $sheet->schema->column_mappings['transactions'] ?? null;
+            if (!$mappings) {
+                return response()->json(['error' => 'Sheet schema not detected. Re-connect your sheet.'], 422);
             }
 
-            // Parse transactions
-            $transactions = $this->parseTransactions($values, $sheet);
+            $this->sheetsService->authenticateServiceAccount();
+            $rows = $this->sheetsService->getValues($sheet->spreadsheet_id, 'Transactions!A:Z');
 
-            // Apply filters
+            if (empty($rows) || count($rows) < 2) {
+                return response()->json(['transactions' => [], 'meta' => ['total' => 0]]);
+            }
+
+            $transactions = $this->parseTransactions(array_slice($rows, 1), $mappings);
+
+            // Filters
             if ($request->has('uncategorized')) {
-                $transactions = collect($transactions)->filter(function ($t) {
-                    return empty($t['category']);
-                })->values();
+                $transactions = collect($transactions)->filter(fn ($t) => empty($t['category']))->values()->all();
             }
-
             if ($request->has('account')) {
                 $account = $request->input('account');
-                $transactions = collect($transactions)->filter(function ($t) use ($account) {
-                    return $t['account'] === $account;
-                })->values();
+                $transactions = collect($transactions)->filter(fn ($t) => $t['account'] === $account)->values()->all();
             }
-
             if ($request->has('from_date')) {
-                $fromDate = $request->input('from_date');
-                $transactions = collect($transactions)->filter(function ($t) use ($fromDate) {
-                    return $t['date'] >= $fromDate;
-                })->values();
+                $from = $request->input('from_date');
+                $transactions = collect($transactions)->filter(fn ($t) => ($t['date'] ?? '') >= $from)->values()->all();
             }
 
             // Pagination
-            $perPage = $request->input('per_page', 50);
-            $page = $request->input('page', 1);
+            $perPage = (int) $request->input('per_page', 50);
+            $page = (int) $request->input('page', 1);
             $total = count($transactions);
-            $transactions = collect($transactions)
-                ->slice(($page - 1) * $perPage, $perPage)
-                ->values();
+            $paged = array_slice($transactions, ($page - 1) * $perPage, $perPage);
 
             return response()->json([
-                'transactions' => $transactions,
+                'transactions' => array_values($paged),
                 'meta' => [
                     'total' => $total,
                     'per_page' => $perPage,
                     'current_page' => $page,
-                    'last_page' => ceil($total / $perPage),
-                ]
+                    'last_page' => (int) ceil($total / $perPage),
+                ],
             ]);
-
         } catch (\Exception $e) {
             Log::error('Error fetching transactions: ' . $e->getMessage());
-            return response()->json([
-                'error' => 'Failed to fetch transactions',
-                'message' => $e->getMessage()
-            ], 500);
+            return response()->json(['error' => 'Failed to fetch transactions'], 500);
         }
     }
 
     /**
-     * Get a single transaction
+     * Get a single transaction by Transaction ID.
      */
     public function show(Request $request, string $id): JsonResponse
     {
         try {
-            $user = $request->user();
-            $sheet = $user->sheets()->where('sheet_type', 'transactions')->first();
-
-            if (!$sheet) {
-                return response()->json(['error' => 'No transaction sheet configured'], 404);
+            $sheet = $request->user()->sheets()->first();
+            if (!$sheet || !$sheet->schema) {
+                return response()->json(['error' => 'No sheet connected'], 404);
             }
 
-            // This would use the row identity service to find the specific transaction
-            // For now, returning a placeholder
-            return response()->json([
-                'transaction' => [
-                    'id' => $id,
-                    // Transaction data would be fetched here
-                ]
-            ]);
+            $mappings = $sheet->schema->column_mappings['transactions'] ?? [];
+            $this->sheetsService->authenticateServiceAccount();
+            $rows = $this->sheetsService->getValues($sheet->spreadsheet_id, 'Transactions!A:Z');
 
+            if (empty($rows) || count($rows) < 2) {
+                return response()->json(['error' => 'Transaction not found'], 404);
+            }
+
+            $txIdCol = $mappings['Transaction ID'] ?? null;
+            foreach (array_slice($rows, 1) as $index => $row) {
+                $rowTxId = trim($row[$txIdCol] ?? '');
+                if ($rowTxId === $id) {
+                    return response()->json([
+                        'transaction' => $this->rowToTransaction($row, $mappings, $index + 2),
+                    ]);
+                }
+            }
+
+            return response()->json(['error' => 'Transaction not found'], 404);
         } catch (\Exception $e) {
             Log::error('Error fetching transaction: ' . $e->getMessage());
-            return response()->json([
-                'error' => 'Failed to fetch transaction',
-                'message' => $e->getMessage()
-            ], 500);
+            return response()->json(['error' => 'Failed to fetch transaction'], 500);
         }
     }
 
     /**
-     * Update a transaction (category, note, tags)
+     * Update a transaction's Category or Note. Safe writes only.
      */
     public function update(Request $request, string $id): JsonResponse
     {
         $request->validate([
             'category' => 'nullable|string|max:255',
             'note' => 'nullable|string|max:500',
-            'tags' => 'nullable|array',
-            'tags.*' => 'string|max:50',
         ]);
 
         try {
-            $user = $request->user();
-            $sheet = $user->sheets()->where('sheet_type', 'transactions')->first();
-
-            if (!$sheet) {
-                return response()->json(['error' => 'No transaction sheet configured'], 404);
+            $sheet = $request->user()->sheets()->first();
+            if (!$sheet || !$sheet->schema) {
+                return response()->json(['error' => 'No sheet connected'], 404);
             }
 
-            // Set up Google Sheets service
-            $this->sheetsService->setAccessToken([
-                'access_token' => $user->google_token,
-                'refresh_token' => $user->google_refresh_token,
-            ]);
+            $mappings = $sheet->schema->column_mappings['transactions'] ?? [];
+            $this->sheetsService->authenticateServiceAccount();
 
-            // Get schema to find column positions
-            $schema = json_decode($sheet->schema->columns, true);
+            // Find the row by Transaction ID
+            $rows = $this->sheetsService->getValues($sheet->spreadsheet_id, 'Transactions!A:Z');
+            $txIdCol = $mappings['Transaction ID'] ?? null;
 
-            // Build updates array
+            if ($txIdCol === null) {
+                return response()->json(['error' => 'Schema missing Transaction ID column'], 422);
+            }
+
+            $targetRow = null;
+            foreach (array_slice($rows, 1) as $index => $row) {
+                if (trim($row[$txIdCol] ?? '') === $id) {
+                    $targetRow = $index + 2; // 1-indexed, skip header
+                    break;
+                }
+            }
+
+            if (!$targetRow) {
+                return response()->json(['error' => 'Transaction not found'], 404);
+            }
+
+            // Write only safe columns
             $updates = [];
+            foreach (self::WRITABLE_COLUMNS as $col) {
+                $inputKey = strtolower($col);
+                if ($request->has($inputKey) && isset($mappings[$col])) {
+                    $colIndex = $mappings[$col];
+                    $colLetter = $this->columnLetter($colIndex);
+                    $range = "Transactions!{$colLetter}{$targetRow}";
+                    $value = $request->input($inputKey) ?? '';
 
-            if ($request->has('category')) {
-                $updates['category'] = $request->input('category');
+                    $this->sheetsService->updateValues(
+                        $sheet->spreadsheet_id,
+                        $range,
+                        [[$value]],
+                    );
+
+                    $updates[$inputKey] = $value;
+                }
             }
 
-            if ($request->has('note')) {
-                $updates['note'] = $request->input('note');
-            }
-
-            if ($request->has('tags')) {
-                $updates['tags'] = implode(', ', $request->input('tags'));
-            }
-
-            // Use adapter service to safely update the transaction
-            $this->adapterService->updateTransaction(
-                $sheet,
-                $id,
-                $updates
-            );
-
-            // Log the update
             Log::info('Transaction updated', [
-                'user_id' => $user->id,
+                'user_id' => $request->user()->id,
                 'transaction_id' => $id,
+                'row' => $targetRow,
                 'updates' => $updates,
             ]);
 
             return response()->json([
                 'message' => 'Transaction updated successfully',
-                'transaction' => [
-                    'id' => $id,
-                    ...$updates,
-                ]
+                'updates' => $updates,
             ]);
-
         } catch (\Exception $e) {
             Log::error('Error updating transaction: ' . $e->getMessage());
-            return response()->json([
-                'error' => 'Failed to update transaction',
-                'message' => $e->getMessage()
-            ], 500);
+            return response()->json(['error' => 'Failed to update transaction'], 500);
         }
     }
 
     /**
-     * Create a new manual transaction
+     * Create a new manual transaction (append to sheet).
      */
     public function store(Request $request): JsonResponse
     {
@@ -220,121 +204,107 @@ class TransactionController extends Controller
             'account' => 'required|string|max:255',
             'category' => 'nullable|string|max:255',
             'note' => 'nullable|string|max:500',
-            'tags' => 'nullable|array',
-            'tags.*' => 'string|max:50',
         ]);
 
         try {
-            $user = $request->user();
-            $sheet = $user->sheets()->where('sheet_type', 'transactions')->first();
-
-            if (!$sheet) {
-                return response()->json(['error' => 'No transaction sheet configured'], 404);
+            $sheet = $request->user()->sheets()->first();
+            if (!$sheet || !$sheet->schema) {
+                return response()->json(['error' => 'No sheet connected'], 404);
             }
 
-            // Set up Google Sheets service
-            $this->sheetsService->setAccessToken([
-                'access_token' => $user->google_token,
-                'refresh_token' => $user->google_refresh_token,
-            ]);
+            $mappings = $sheet->schema->column_mappings['transactions'] ?? [];
+            $this->sheetsService->authenticateServiceAccount();
 
-            // Prepare transaction data
-            $schema = json_decode($sheet->schema->columns, true);
-            $rowData = $this->buildRowData($request->all(), $schema);
+            // Build row based on schema mappings
+            $maxCol = max(array_values($mappings)) + 1;
+            $row = array_fill(0, $maxCol, '');
 
-            // Append to sheet
-            $range = "{$sheet->sheet_name}!A:Z";
+            $fieldMap = [
+                'Date' => $request->input('date'),
+                'Description' => $request->input('description'),
+                'Amount' => $request->input('amount'),
+                'Account' => $request->input('account'),
+                'Category' => $request->input('category', ''),
+            ];
+
+            foreach ($fieldMap as $col => $value) {
+                if (isset($mappings[$col])) {
+                    $row[$mappings[$col]] = $value;
+                }
+            }
+
             $this->sheetsService->appendValues(
                 $sheet->spreadsheet_id,
-                $range,
-                [$rowData]
+                'Transactions!A:Z',
+                [$row],
             );
 
             return response()->json([
                 'message' => 'Transaction created successfully',
-                'transaction' => $request->all(),
+                'transaction' => $request->only(['date', 'description', 'amount', 'account', 'category']),
             ], 201);
-
         } catch (\Exception $e) {
             Log::error('Error creating transaction: ' . $e->getMessage());
-            return response()->json([
-                'error' => 'Failed to create transaction',
-                'message' => $e->getMessage()
-            ], 500);
+            return response()->json(['error' => 'Failed to create transaction'], 500);
         }
     }
 
     /**
-     * Parse raw sheet values into transaction objects
+     * Parse data rows using schema column mappings.
      */
-    protected function parseTransactions(array $values, Sheet $sheet): array
+    protected function parseTransactions(array $dataRows, array $mappings): array
     {
-        if (count($values) < 2) {
-            return []; // No data rows
-        }
-
-        $headers = array_map('strtolower', $values[0]);
         $transactions = [];
 
-        // Get column mappings
-        $columnMap = [
-            'date' => array_search('date', $headers),
-            'description' => array_search('description', $headers),
-            'amount' => array_search('amount', $headers),
-            'account' => array_search('account', $headers),
-            'category' => array_search('category', $headers),
-            'note' => array_search('note', $headers),
-            'tags' => array_search('tags', $headers),
-            'id' => array_search('__mobile_app_id', $headers),
-        ];
-
-        // Parse data rows
-        for ($i = 1; $i < count($values); $i++) {
-            $row = $values[$i];
-
-            $transaction = [
-                'row' => $i + 1, // Row number in sheet (1-indexed)
-                'id' => $columnMap['id'] !== false ? ($row[$columnMap['id']] ?? null) : "row_$i",
-                'date' => $columnMap['date'] !== false ? ($row[$columnMap['date']] ?? null) : null,
-                'description' => $columnMap['description'] !== false ? ($row[$columnMap['description']] ?? null) : null,
-                'amount' => $columnMap['amount'] !== false ? floatval($row[$columnMap['amount']] ?? 0) : 0,
-                'account' => $columnMap['account'] !== false ? ($row[$columnMap['account']] ?? null) : null,
-                'category' => $columnMap['category'] !== false ? ($row[$columnMap['category']] ?? null) : null,
-                'note' => $columnMap['note'] !== false ? ($row[$columnMap['note']] ?? null) : null,
-                'tags' => $columnMap['tags'] !== false ? ($row[$columnMap['tags']] ?? null) : null,
-            ];
+        foreach ($dataRows as $index => $row) {
+            $tx = $this->rowToTransaction($row, $mappings, $index + 2);
 
             // Skip empty rows
-            if (empty($transaction['description']) && empty($transaction['amount'])) {
+            if (empty($tx['description']) && empty($tx['amount'])) {
                 continue;
             }
 
-            $transactions[] = $transaction;
+            $transactions[] = $tx;
         }
 
         return $transactions;
     }
 
-    /**
-     * Build row data array for appending to sheet
-     */
-    protected function buildRowData(array $data, array $schema): array
+    protected function rowToTransaction(array $row, array $mappings, int $sheetRow): array
     {
-        $row = [];
+        $get = fn (string $col) => trim($row[$mappings[$col] ?? -1] ?? '');
 
-        foreach ($schema as $column => $info) {
-            $key = strtolower($column);
+        return [
+            'row' => $sheetRow,
+            'transaction_id' => $get('Transaction ID'),
+            'date' => $get('Date'),
+            'description' => $get('Description'),
+            'category' => $get('Category'),
+            'amount' => (float) ($get('Amount') ?: 0),
+            'account' => $get('Account'),
+            'account_number' => $get('Account #'),
+            'institution' => $get('Institution'),
+            'month' => $get('Month'),
+            'week' => $get('Week'),
+            'check_number' => $get('Check Number'),
+            'full_description' => $get('Full Description'),
+            'date_added' => $get('Date Added'),
+            'categorized_date' => $get('Categorized Date'),
+        ];
+    }
 
-            if (isset($data[$key])) {
-                $row[$info['position']] = $data[$key];
-            } else {
-                $row[$info['position']] = '';
-            }
+    /**
+     * Convert 0-based column index to letter (0=A, 1=B, ..., 25=Z, 26=AA).
+     */
+    protected function columnLetter(int $index): string
+    {
+        $letter = '';
+        $index++;
+        while ($index > 0) {
+            $index--;
+            $letter = chr(65 + ($index % 26)) . $letter;
+            $index = intdiv($index, 26);
         }
-
-        // Ensure array is properly indexed
-        ksort($row);
-
-        return array_values($row);
+        return $letter;
     }
 }
