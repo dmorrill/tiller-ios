@@ -12,7 +12,7 @@ struct APIConfig {
     #if DEBUG
     static let baseURL = "http://localhost:8000/api"
     #else
-    static let baseURL = "http://161.35.255.184/api"
+    static let baseURL = "https://tillerios.com/api"
     #endif
 
     static let timeout: TimeInterval = 30.0
